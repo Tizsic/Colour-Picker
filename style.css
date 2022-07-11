@@ -4,6 +4,7 @@
 
 #header{
     text-align: center;
+    transition: .3s;
 }
 
 #nav {
@@ -19,4 +20,14 @@
 
 .box:hover {
     transform:scale(2.5);
+}
+
+button {
+    color: black;
+    padding: 12px 15px;
+    text-align: center;
+    display: inline-block;
+    font-size: 12px;
+    margin: 4px 2px;
+    cursor: pointer;
 }

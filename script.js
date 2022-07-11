@@ -36,12 +36,20 @@ function createBoxes() {
         box.addEventListener('mouseover', function(e) {
             e.target.style.backgroundColor = rgb;
             header.style.color = rgb;
+            header.style.transform = "scale(1.5)";
         });
-    })
+
+        box.addEventListener('mouseout', function(e) {
+            document.body.onmouseout = () => {
+                header.style.transform = "scale(1)";
+            }
+        });
+
+        
+    });
 }
 
-const resetbtn = document.querySelector('#reset');
-resetbtn.addEventListener('click', function(e) {
+document.querySelector('#reset').addEventListener('click', () => {
     location.reload();
 });
 

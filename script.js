@@ -42,10 +42,9 @@ function createBoxes() {
         box.addEventListener('mouseout', function(e) {
             document.body.onmouseout = () => {
                 header.style.transform = "scale(1)";
+                container.style.border = `4px solid  ${rgb}`, rgb;
             }
         });
-
-        
     });
 }
 

@@ -78,7 +78,7 @@ rainbowbtn.addEventListener('click', function(e) {
             header.style.transform = "scale(1.5)";
             container.style.border = `4px solid  ${localColor}`, localColor;
         });
-
+        
         box.addEventListener('mouseout', function(e) {
             document.body.onmouseout = () => {
                 header.style.transform = "scale(1)";
@@ -86,9 +86,6 @@ rainbowbtn.addEventListener('click', function(e) {
         });
     });
 });
-
-
-
 
 document.querySelector('#reset').addEventListener('click', () => {
     location.reload();

@@ -1,31 +1,30 @@
 //selects the container div within the html file
 const container = document.querySelector('#container');
-const rainbowbtn = document.querySelector('#rainbow');
+const rainbowBtn = document.querySelector('#rainbow');
 const blackAndWhiteBtn = document.querySelector('#bw');
-let header = document.querySelector('#header');
-let mouseOverBtn = document.querySelector('#mouseOver');
-let clickBtn = document.querySelector('#click');
-
+const eraserBtn = document.querySelector('#eraser');
+const colorChangeBtn = document.querySelector('#colorchange');
+const header = document.querySelector('#header');
+const mySound = new Audio('new_clicker.wav');
 
 //function to create the rainbow boxes
-function rainbow(){
+function rainbow() {
     let randomBetween = function (min, max) { return min + Math.floor(Math.random() * (max - min + 1)); };
-            let r = randomBetween(0, 255);
-            let g = randomBetween(0, 255);
-            let b = randomBetween(0, 255);
-            const rgb = `rgb(${r},${g},${b})`;
-            return rgb;
+    let r = randomBetween(0, 255);
+    let g = randomBetween(0, 255);
+    let b = randomBetween(0, 255);
+    let rgb = "rgb(".concat(r, ",").concat(g, ",").concat(b, ")");
+    return rgb;
 }
-
 //function to create black and white boxes
 function blackAndWhite() {
-    let choosenValue = Math.random() < 0.5 ?  0: 1;
-    if (choosenValue === 0){
-        return `rgb(0, 0, 0)`;
+    let choosenValue = Math.random() < 0.5 ? 0 : 1;
+    if (choosenValue === 0) {
+        return "rgb(0, 0, 0)";
     }
-    else return `rgb(255, 255, 255)`;
+    else
+        return "rgb(255, 255, 255)";
 }
-
 //function to style the container
 function styleContainer() {
     container.style.border = '4px solid black';
@@ -35,62 +34,82 @@ function styleContainer() {
     container.style.height = '493px';
     container.style.margin = '0 auto';
 }
-
 //function to create the boxes, style and append them
 function createBoxes() {
     for (let i = 0; i < 256; i++) {
-        var box = document.createElement('div');
+        let box = document.createElement('div');
         box.classList.add('box');
         box.style.display = 'inline-block';
         box.style.width = '15px';
         box.style.height = '15px';
         box.style.border = '1px solid black';
         box.style.margin = '5px';
-        container.appendChild(box);        
-    } 
+        container.appendChild(box);
+    }
 }
-
 //upon clicking the black/white button, it will turn the boxes black or white
-blackAndWhiteBtn.addEventListener('click', function(e) {
-    document.querySelectorAll('.box').forEach(function(box) {
-        const value = blackAndWhite();
-        box.addEventListener('mouseover', function(e) {
+blackAndWhiteBtn.addEventListener('click', function (e) {
+    document.querySelectorAll('.box').forEach(function (box) {
+        let value = blackAndWhite();
+        box.addEventListener('mouseover', function (e) {
             let localColor = blackAndWhite();
             e.target.style.backgroundColor = localColor;
             header.style.color = localColor;
-            container.style.border = `4px solid ${localColor}`, localColor;
+            container.style.border = "4px solid ".concat(localColor), localColor;
             header.style.transform = "scale(1.5)";
-        });  
-        
-        box.addEventListener('mouseout', function(e) {
+            mySound.play();
+        });
+        box.addEventListener('mouseout', function (e) {
             header.style.transform = "scale(1)";
         });
     });
 });
-
 //Upon clicking the rainbow button, it will turn the boxes rainbow
-rainbowbtn.addEventListener('click', function(e) {
-    document.querySelectorAll('.box').forEach(function(box) {
-        box.addEventListener('mouseover', function(e) {
+rainbowBtn.addEventListener('click', function (e) {
+    document.querySelectorAll('.box').forEach(function (box) {
+        box.addEventListener('mouseover', function (e) {
             let localColor = rainbow();
             e.target.style.backgroundColor = localColor;
             header.style.color = localColor;
             header.style.transform = "scale(1.5)";
-            container.style.border = `4px solid  ${localColor}`, localColor;
+            container.style.border = "4px solid  ".concat(localColor), localColor;
+            mySound.play();
         });
-        
-        box.addEventListener('mouseout', function(e) {
-            document.body.onmouseout = () => {
+        box.addEventListener('mouseout', function (e) {
+            document.body.onmouseout = function () {
                 header.style.transform = "scale(1)";
-            }
+            };
         });
     });
 });
 
-document.querySelector('#reset').addEventListener('click', () => {
-    location.reload();
+//resets boxes to clear
+eraserBtn.addEventListener('click', function (e) {
+    document.querySelectorAll('.box').forEach(function (box) {
+        box.addEventListener('mouseover', function (e) {
+            e.target.style.backgroundColor = "transparent";
+            header.style.color = "black";
+            container.style.border = "4px solid black";
+            mySound.play();
+        });
+    });
 });
 
+//allows you to pick a color
+colorChangeBtn.addEventListener('input', function (e) {
+    document.querySelectorAll('.box').forEach(function (box) {
+        box.addEventListener('mouseover', function (e) {
+            e.target.style.backgroundColor = colorChangeBtn.value;
+            header.style.color = "black";
+            container.style.border = "4px solid black";
+            mySound.play();
+        });
+    });
+});
+
+document.querySelector('#reset').addEventListener('click', function () {
+    location.reload();
+});
 //main function
 function main() {
     styleContainer();

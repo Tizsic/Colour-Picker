@@ -3,6 +3,14 @@
     font-family: 'Edu VIC WA NT Beginner', cursive;
 }
 
+html, body {
+    overflow-x: hidden;
+  }
+  
+body {
+    position: relative;
+  }
+
 #header{
     text-align: center;
     transition: .3s;
@@ -12,6 +20,13 @@
     margin: 15px;
     text-align: center;
     margin: 25px;
+}
+
+#colorpicker{
+    display: flex;
+    justify-content: center;
+    margin: 25px;
+
 }
 
 /*for animation*/

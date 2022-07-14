@@ -6,9 +6,13 @@
 html, body {
     overflow-x: hidden;
   }
-  
+
 body {
     position: relative;
+    -webkit-user-select: none;
+    -moz-user-select: -moz-none;
+     -ms-user-select: none;
+         user-select: none;
   }
 
 #header{

@@ -1,11 +1,15 @@
 //selects the container div within the html file
 const container = document.querySelector('#container');
+
+//selects buttons
 const rainbowBtn = document.querySelector('#rainbow');
 const blackAndWhiteBtn = document.querySelector('#bw');
 const eraserBtn = document.querySelector('#eraser');
 const colorChangeBtn = document.querySelector('#colorchange');
+
 const header = document.querySelector('#header');
 const mySound = new Audio('new_clicker.wav');
+let localColor;
 
 //function to create the rainbow boxes
 function rainbow() {
@@ -52,7 +56,7 @@ blackAndWhiteBtn.addEventListener('click', function (e) {
     document.querySelectorAll('.box').forEach(function (box) {
         let value = blackAndWhite();
         box.addEventListener('mouseover', function (e) {
-            let localColor = blackAndWhite();
+            localColor = blackAndWhite();
             e.target.style.backgroundColor = localColor;
             header.style.color = localColor;
             container.style.border = "4px solid ".concat(localColor), localColor;
@@ -68,7 +72,7 @@ blackAndWhiteBtn.addEventListener('click', function (e) {
 rainbowBtn.addEventListener('click', function (e) {
     document.querySelectorAll('.box').forEach(function (box) {
         box.addEventListener('mouseover', function (e) {
-            let localColor = rainbow();
+            localColor = rainbow();
             e.target.style.backgroundColor = localColor;
             header.style.color = localColor;
             header.style.transform = "scale(1.5)";
@@ -83,7 +87,7 @@ rainbowBtn.addEventListener('click', function (e) {
     });
 });
 
-//resets boxes to clear
+//resets boxes to clear/eraser
 eraserBtn.addEventListener('click', function (e) {
     document.querySelectorAll('.box').forEach(function (box) {
         box.addEventListener('mouseover', function (e) {
@@ -107,9 +111,11 @@ colorChangeBtn.addEventListener('input', function (e) {
     });
 });
 
+//refreshes the page/clears all the boxes
 document.querySelector('#reset').addEventListener('click', function () {
     location.reload();
 });
+
 //main function
 function main() {
     styleContainer();
